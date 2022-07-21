@@ -16,6 +16,6 @@ build vpc:
 deploy vpc:
   extends: .terraform:deploy
   dependencies:
-    - build
+    - build vpc
   environment:
     name: $TF_STATE_NAME
