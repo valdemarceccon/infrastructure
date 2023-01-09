@@ -1,21 +1,21 @@
 variables:
-  TF_ROOT: ${CI_PROJECT_DIR}/vpc
-  TF_STATE_NAME: vpc
+  TF_ROOT: ${CI_PROJECT_DIR}/network/vpc
+  TF_STATE_NAME: network-vpc
 
-vpc fmt:
+network:vpc:fmt:
   extends: .terraform:fmt
   needs: []
 
-validate vpc:
+network:vpc:validate:
   extends: .terraform:validate
   needs: []
 
-build vpc:
+network:vpc:plan:
   extends: .terraform:build
 
-deploy vpc:
+network:vpc:apply:
   extends: .terraform:deploy
   dependencies:
-    - build vpc
+    - network:vpc:plan
   environment:
     name: $TF_STATE_NAME
